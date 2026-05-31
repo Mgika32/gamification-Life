@@ -1,0 +1,217 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>🏆 Mes Succès | Quête Éternelle</title>
+    <link rel="stylesheet" href="css/style.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=IM+Fell+English&family=UnifrakturMaguntia&display=swap" rel="stylesheet">
+</head>
+<body>
+    <!-- ===== HEADER IDENTIQUE ===== -->
+    <header class="app-header">
+        <div class="container">
+            <div class="header-content">
+                <div class="logo">
+                    <i class="fas fa-dice-d20"></i> Quête Éternelle
+                </div>
+                <nav class="main-nav">
+                    <a href="index.html" class="nav-link"><i class="fas fa-home"></i> Tableau</a>
+                    <a href="tasks.html" class="nav-link"><i class="fas fa-sword"></i> Quêtes</a>
+                    <a href="badges.html" class="nav-link active"><i class="fas fa-medal"></i> Succès</a>
+                    <a href="profile.html" class="nav-link"><i class="fas fa-user"></i> Profil</a>
+                </nav>
+            </div>
+        </div>
+    </header>
+
+    <!-- ===== SECTION SUCCÈS AVEC PARCHEMIN ===== -->
+    <main class="container">
+        <section class="badges-section">
+            <div class="section-header">
+                <h2><i class="fas fa-scroll"></i> Mes Succès Légendaires</h2>
+                <p>Débloquez ces récompenses en accomplissant vos quêtes. Chaque succès vous rapproche de la grandeur !</p>
+            </div>
+
+            <!-- ===== GRILLE DES SUCCÈS ===== -->
+            <div class="badges-grid" id="badges-grid">
+                <!-- Badges dynamiques -->
+            </div>
+        </section>
+    </main>
+
+    <!-- ===== FOOTER IDENTIQUE ===== -->
+    <footer>
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-logo">
+                    <i class="fas fa-dragon"></i>
+                    <span>Quête Éternelle</span>
+                </div>
+                <p>Chaque quête compte dans votre légende éternelle.</p>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+    // ===== CHARGEMENT DES DONNÉES =====
+    let tasks = JSON.parse(localStorage.getItem('tasks')) || [];
+    let totalPoints = parseInt(localStorage.getItem('totalPoints')) || 0;
+    let badges = JSON.parse(localStorage.getItem('badges')) || [];
+    let streak = parseInt(localStorage.getItem('streak')) || 0;
+
+    // ===== DÉFINITION DES SUCCÈS (MÊME QUE DANS tasks.html) =====
+    const allBadges = [
+        {
+            id: "first-step",
+            name: "Premier Pas",
+            description: "Avoir 10 points d'expérience",
+            icon: "fa-star",
+            color: "#f59e0b",
+            points: 10
+        },
+        {
+            id: "adventurer",
+            name: "Aventurier",
+            description: "Avoir 50 points d'expérience",
+            icon: "fa-hiking",
+            color: "#10b981",
+            points: 50
+        },
+        {
+            id: "quest-master",
+            name: "Maître des Quêtes",
+            description: "Avoir 100 points d'expérience",
+            icon: "fa-crown",
+            color: "#8b5cf6",
+            points: 100
+        },
+        {
+            id: "dragon-slayer",
+            name: "Tueur de Dragon",
+            description: "Terminer une quête quotidienne",
+            icon: "fa-dragon",
+            color: "#ef4444",
+            points: 25
+        },
+        {
+            id: "legendary",
+            name: "Légendaire",
+            description: "Terminer 5 quêtes",
+            icon: "fa-fire",
+            color: "#f97316",
+            points: 50
+        },
+        {
+            id: "streak-master",
+            name: "Maître de la Streak",
+            description: "Terminer 7 quêtes quotidiennes d'affilée",
+            icon: "fa-infinity",
+            color: "#06b6d4",
+            points: 100
+        },
+        {
+            id: "mercenary",
+            name: "Mercenaire",
+            description: "Terminer 10 quêtes ponctuelles",
+            icon: "fa-coins",
+            color: "#84cc16",
+            points: 75
+        },
+        {
+            id: "collector",
+            name: "Collectionneur",
+            description: "Avoir 5 succès différents",
+            icon: "fa-layer-group",
+            color: "#ec4899",
+            points: 50
+        },
+        {
+            id: "speedrunner",
+            name: "Speedrunner",
+            description: "Terminer 3 quêtes en 1 jour",
+            icon: "fa-bolt",
+            color: "#f59e0b",
+            points: 40
+        },
+        {
+            id: "perfectionist",
+            name: "Perfectionniste",
+            description: "Avoir un taux de réussite de 100%",
+            icon: "fa-check-double",
+            color: "#10b981",
+            points: 60
+        }
+    ];
+
+    // ===== FONCTION D'AFFICHAGE =====
+    function renderBadges() {
+        const grid = document.getElementById('badges-grid');
+        grid.innerHTML = '';
+
+        if (badges.length === 0) {
+            grid.innerHTML = `
+                <div class="empty-state">
+                    <div class="empty-icon">
+                        <i class="fas fa-medal"></i>
+                    </div>
+                    <h3>Aucun succès débloqué</h3>
+                    <p>Terminez des quêtes pour débloquer des récompenses légendaires !</p>
+                    <a href="tasks.html" class="btn btn-primary">
+                        <i class="fas fa-sword"></i> Voir les quêtes
+                    </a>
+                </div>
+            `;
+            return;
+        }
+
+        // Afficher les badges obtenus
+        badges.forEach(badge => {
+            const badgeCard = document.createElement('div');
+            badgeCard.className = 'badge-card';
+            badgeCard.innerHTML = `
+                <div class="badge-icon" style="background-color: ${badge.color}">
+                    <i class="fas ${badge.icon}"></i>
+                </div>
+                <h3 class="badge-name">${badge.name}</h3>
+                <p class="badge-description">${badge.description}</p>
+                <span class="badge-points">+${badge.points} XP</span>
+            `;
+            grid.appendChild(badgeCard);
+        });
+
+        // Afficher les badges non obtenus (optionnel)
+        const unlockedBadgeIds = badges.map(b => b.id);
+        const lockedBadges = allBadges.filter(b => !unlockedBadgeIds.includes(b.id));
+
+        if (lockedBadges.length > 0) {
+            grid.innerHTML += `<div class="section-divider"></div>`;
+
+            lockedBadges.forEach(badge => {
+                const badgeCard = document.createElement('div');
+                badgeCard.className = 'badge-card badge-locked';
+                badgeCard.innerHTML = `
+                    <div class="badge-icon" style="background-color: #e5e7eb">
+                        <i class="fas ${badge.icon} fa-lock"></i>
+                    </div>
+                    <h3 class="badge-name">${badge.name}</h3>
+                    <p class="badge-description">${badge.description}</p>
+                    <span class="badge-points">+${badge.points} XP</span>
+                    <div class="badge-locked-overlay">
+                        <i class="fas fa-lock"></i>
+                        <p>Verrouillé</p>
+                    </div>
+                `;
+                grid.appendChild(badgeCard);
+            });
+        }
+    }
+
+    // ===== INITIALISATION =====
+    document.addEventListener('DOMContentLoaded', function() {
+        renderBadges();
+    });
+    </script>
+</body>
+</html>

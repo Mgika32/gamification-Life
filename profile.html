@@ -1,0 +1,256 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Mon Profil</title>
+    <link rel="stylesheet" href="css/style.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=IM+Fell+English&family=UnifrakturMaguntia&display=swap" rel="stylesheet">
+</head>
+<body>
+    <header class="app-header">
+        <div class="container">
+            <div class="header-content">
+                <div class="logo">
+                    <i class="fas fa-dice-d20"></i> Quête Éternelle
+                </div>
+                <nav class="main-nav">
+                    <a href="index.html" class="nav-link"><i class="fas fa-home"></i> Tableau</a>
+                    <a href="tasks.html" class="nav-link"><i class="fas fa-sword"></i> Quêtes</a>
+                    <a href="badges.html" class="nav-link"><i class="fas fa-medal"></i> Succès</a>
+                    <a href="profile.html" class="nav-link active"><i class="fas fa-user"></i> Profil</a>
+                </nav>
+            </div>
+        </div>
+    </header>
+
+    <!-- ===== SECTION PROFIL ===== -->
+    <main class="container">
+        <section class="profile-section">
+            <div class="section-header">
+                <h2><i class="fas fa-scroll"></i> Mon Profil d'Aventurier</h2>
+                <p>Vos statistiques et votre progression dans l'univers de Quête Éternelle.</p>
+            </div>
+
+            <!-- ===== CARD PROFIL ===== -->
+            <div class="profile-card">
+                <div class="profile-header">
+                    <div class="profile-avatar">
+                        <i class="fas fa-user-knight"></i>
+                    </div>
+                    <div class="profile-info">
+                        <h3>Nom de l'Aventurier</h3>
+                        <p>Niveau <span id="player-level">1</span></p>
+                    </div>
+                </div>
+                <div class="profile-stats">
+                    <div class="stat-item">
+                        <i class="fas fa-star"></i>
+                        <div>
+                            <span id="xp-points">0</span> XP
+                            <p>Points d'expérience accumulés</p>
+                        </div>
+                    </div>
+                    <div class="stat-item">
+                        <i class="fas fa-layer-group"></i>
+                        <div>
+                            <span id="completed-tasks">0</span> Quêtes
+                            <p>Quêtes accomplies</p>
+                        </div>
+                    </div>
+                    <div class="stat-item">
+                        <i class="fas fa-trophy"></i>
+                        <div>
+                            <span id="total-badges">0</span> Succès
+                            <p>Récompenses débloquées</p>
+                        </div>
+                    </div>
+                    <div class="stat-item">
+                        <i class="fas fa-infinity"></i>
+                        <div>
+                            <span id="current-streak">0</span> jours
+                            <p>Streak actuel</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="profile-actions">
+                    <button class="btn btn-primary">
+                        <i class="fas fa-edit"></i> Modifier le profil
+                    </button>
+                    <button class="btn btn-danger" onclick="resetProgress()">
+                        <i class="fas fa-trash"></i> Réinitialiser
+                    </button>
+                </div>
+            </div>
+
+            <!-- ===== PARCHEMIN DE STATISTIQUES ===== -->
+            <div class="parchment">
+                <div class="parchment-header">
+                    <i class="fas fa-chart-line"></i>
+                    <h3>Statistiques Avancées</h3>
+                </div>
+                <div class="stats-content">
+                    <div class="stat-bar">
+                        <div class="stat-label">Quêtes Quotidiennes</div>
+                        <div class="stat-progress">
+                            <div class="progress-fill" id="daily-progress" style="width: 0%"></div>
+                        </div>
+                        <div class="stat-value" id="daily-value">0/0</div>
+                    </div>
+                    <div class="stat-bar">
+                        <div class="stat-label">Quêtes Ponctuelles</div>
+                        <div class="stat-progress">
+                            <div class="progress-fill" id="once-progress" style="width: 0%"></div>
+                        </div>
+                        <div class="stat-value" id="once-value">0/0</div>
+                    </div>
+                    <div class="stat-bar">
+                        <div class="stat-label">Streak Actuel</div>
+                        <div class="stat-progress">
+                            <div class="progress-fill" id="streak-progress" style="width: 0%"></div>
+                        </div>
+                        <div class="stat-value" id="streak-value">0 jours</div>
+                    </div>
+                    <div class="stat-bar">
+                        <div class="stat-label">Taux de Réussite</div>
+                        <div class="stat-progress">
+                            <div class="progress-fill" id="success-rate" style="width: 0%"></div>
+                        </div>
+                        <div class="stat-value" id="success-rate-value">0%</div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="recent-success">
+                <h3><i class="fas fa-clock"></i> Derniers Succès</h3>
+                <div class="recent-success-grid" id="recent-success-grid">
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <footer>
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-logo">
+                    <i class="fas fa-dragon"></i>
+                    <span>Quête Éternelle</span>
+                </div>
+                <p>Chaque quête compte dans votre légende éternelle.</p>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+    // ===== CHARGEMENT DES DONNÉES =====
+    let tasks = JSON.parse(localStorage.getItem('tasks')) || [];
+    let totalPoints = parseInt(localStorage.getItem('totalPoints')) || 0;
+    let badges = JSON.parse(localStorage.getItem('badges')) || [];
+    let streak = parseInt(localStorage.getItem('streak')) || 0;
+    let lastTaskDate = localStorage.getItem('lastTaskDate') || null;
+
+    // ===== FONCTIONS =====
+    function updateProfile() {
+        const completedTasks = tasks.filter(task => task.completed);
+        const dailyTasks = tasks.filter(task => task.category === 'daily');
+        const onceTasks = tasks.filter(task => task.category === 'once');
+        const dailyCompleted = dailyTasks.filter(task => task.completed).length;
+        const onceCompleted = onceTasks.filter(task => task.completed).length;
+
+        // Mise à jour des stats
+        document.getElementById('xp-points').textContent = totalPoints;
+        document.getElementById('player-level').textContent = calculateLevel(totalPoints);
+        document.getElementById('completed-tasks').textContent = completedTasks.length;
+        document.getElementById('total-badges').textContent = badges.length;
+        document.getElementById('current-streak').textContent = streak;
+
+        // Mise à jour des progress bars
+        document.getElementById('daily-value').textContent = `${dailyCompleted}/${dailyTasks.length}`;
+        document.getElementById('once-value').textContent = `${onceCompleted}/${onceTasks.length}`;
+        document.getElementById('streak-value').textContent = `${streak} jours`;
+
+        const dailyProgress = dailyTasks.length > 0 ? (dailyCompleted / dailyTasks.length) * 100 : 0;
+        const onceProgress = onceTasks.length > 0 ? (onceCompleted / onceTasks.length) * 100 : 0;
+        const streakProgress = streak > 0 ? (streak / 7) * 100 : 0;
+
+        const successRate = tasks.length > 0 ? (completedTasks.length / tasks.length) * 100 : 0;
+
+        document.getElementById('daily-progress').style.width = `${dailyProgress}%`;
+        document.getElementById('once-progress').style.width = `${onceProgress}%`;
+        document.getElementById('streak-progress').style.width = `${streakProgress}%`;
+        document.getElementById('success-rate').style.width = `${successRate}%`;
+        document.getElementById('success-rate-value').textContent = `${Math.round(successRate)}%`;
+
+        // Affichage des succès récents
+        renderRecentSuccess();
+    }
+
+    function calculateLevel(xp) {
+        let level = 1;
+        let xpForLevel = 100;
+        while (xp >= xpForLevel) {
+            level++;
+            xpForLevel += 50 * level;
+        }
+        return level;
+    }
+
+    function renderRecentSuccess() {
+        const grid = document.getElementById('recent-success-grid');
+        grid.innerHTML = '';
+
+        // Filtrer les 3 derniers succès
+        const recentBadges = [...badges].reverse().slice(0, 3);
+
+        if (recentBadges.length === 0) {
+            grid.innerHTML = `
+                <div class="empty-state">
+                    <div class="empty-icon">
+                        <i class="fas fa-medal"></i>
+                    </div>
+                    <h3>Aucun succès récent</h3>
+                    <p>Terminez des quêtes pour voir vos récompenses ici !</p>
+                    <a href="tasks.html" class="btn btn-primary">
+                        <i class="fas fa-sword"></i> Voir les quêtes
+                    </a>
+                </div>
+            `;
+            return;
+        }
+
+        recentBadges.forEach(badge => {
+            const badgeCard = document.createElement('div');
+            badgeCard.className = 'recent-badge';
+            badgeCard.innerHTML = `
+                <div class="recent-badge-icon" style="background-color: ${badge.color}">
+                    <i class="fas ${badge.icon}"></i>
+                </div>
+                <div class="recent-badge-info">
+                    <h4>${badge.name}</h4>
+                    <p>${badge.description}</p>
+                </div>
+            `;
+            grid.appendChild(badgeCard);
+        });
+    }
+
+    function resetProgress() {
+        if (confirm("Êtes-vous sûr de vouloir réinitialiser toutes vos données ?")) {
+            localStorage.clear();
+            tasks = [];
+            totalPoints = 0;
+            badges = [];
+            streak = 0;
+            lastTaskDate = null;
+            updateProfile();
+            alert("Vos données ont été réinitialisées avec succès !");
+        }
+    }
+
+    document.addEventListener('DOMContentLoaded', function() {
+        updateProfile();
+    });
+    </script>
+</body>
+</html>

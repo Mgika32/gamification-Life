@@ -1,0 +1,279 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Tableau de Bord</title>
+    <link rel="stylesheet" href="css/style.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=UnifrakturMaguntia&family=IM+Fell+English&family=Playfair+Display:wght@400;700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200" rel="stylesheet" />
+</head>
+<body>
+    <header class="app-header">
+        <div class="container">
+            <div class="header-content">
+                <div class="logo-container">
+                    <div class="logo-icon">
+                        <i class="fas fa-dice-d20"></i>
+                    </div>
+                    <div class="logo-text">
+                        <h1>Quête Éternelle</h1>
+                        <p>Votre légende s'écrit ici</p>
+                    </div>
+                </div>
+                <nav class="main-nav">
+                    <a href="index.html" class="nav-link active"><i class="fas fa-home"></i> Tableau</a>
+                    <a href="tasks.html" class="nav-link"><i class="fas fa-sword"></i> Quêtes</a>
+                    <a href="badges.html" class="nav-link"><i class="fas fa-medal"></i> Récompenses</a>
+                    <a href="profile.html" class="nav-link"><i class="fas fa-user"></i> Profil</a>
+                </nav>
+            </div>
+        </div>
+    </header>
+
+    <section class="hero-header">
+        <div class="container">
+            <div class="hero-content">
+                <div class="hero-glow"></div>
+                <h1><i class="fas fa-scroll"></i> Bienvenue, Aventurier !</h1>
+                <p>Votre légende commence ici. Chaque quête accomplie vous rapproche de la grandeur.</p>
+                <div class="points-display">
+                    <div class="xp-icon">
+                        <i class="fas fa-star"></i>
+                    </div>
+                    <div class="xp-text">
+                        <span id="xp-points">0</span> XP
+                    </div>
+                    <div class="level-badge">
+                        <i class="fas fa-layer-group"></i>
+                        <span id="player-level">1</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ===== SECTION QUÊTES EN COURS ===== -->
+    <main class="container">
+        <section class="tasks-container">
+            <div class="section-header">
+                <h2><i class="fas fa-tasks"></i> Quêtes Actives</h2>
+                <div class="section-divider"></div>
+                <p>Vos missions en cours. Cliquez sur une quête pour la marquer comme accomplie.</p>
+            </div>
+
+            <div class="tasks-grid" id="tasks-grid">
+            </div>
+
+            <div class="cta-section">
+                <a href="tasks.html" class="btn btn-primary">
+                    <i class="fas fa-plus-circle"></i> Voir toutes les quêtes
+                </a>
+            </div>
+        </section>
+
+        <!-- ===== BADGES RÉCENTS  ===== -->
+        <section class="badges-container">
+            <div class="section-header">
+                <h2><i class="fas fa-trophy"></i> Récompenses Récemment Débloquées</h2>
+                <div class="section-divider"></div>
+            </div>
+            <div class="badges-grid" id="recent-badges">
+            </div>
+        </section>
+    </main>
+
+    <footer>
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-logo">
+                    <i class="fas fa-dragon"></i>
+                    <span>Quête Éternelle</span>
+                </div>
+                <p>Chaque quête compte dans votre légende éternelle.</p>
+                <div class="footer-stats">
+                    <span><i class="fas fa-star"></i> 0 XP</span>
+                    <span><i class="fas fa-layer-group"></i> Niveau 1</span>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+    // ===== SYSTÈME DE GESTION DES TÂCHES (SYNCHRONISÉ) =====
+    let tasks = JSON.parse(localStorage.getItem('tasks')) || [];
+    let totalPoints = parseInt(localStorage.getItem('totalPoints')) || 0;
+    let badges = JSON.parse(localStorage.getItem('badges')) || [];
+
+    // Sauvegarder les données
+    function saveData() {
+        localStorage.setItem('tasks', JSON.stringify(tasks));
+        localStorage.setItem('totalPoints', totalPoints);
+        localStorage.setItem('badges', JSON.stringify(badges));
+    }
+
+    // Mettre à jour l'affichage des points
+    function updatePointsDisplay() {
+        document.getElementById('xp-points').textContent = totalPoints;
+        updateLevel();
+    }
+
+    // Calculer le niveau
+    function updateLevel() {
+        let level = 1;
+        let xpForLevel = 100;
+        while (totalPoints >= xpForLevel) {
+            level++;
+            xpForLevel += 50 * level;
+        }
+        document.getElementById('player-level').textContent = level;
+    }
+
+    // Rendre les tâches
+    function renderTasks() {
+        const grid = document.getElementById('tasks-grid');
+        grid.innerHTML = '';
+
+        if (tasks.length === 0) {
+            grid.innerHTML = `
+                <div class="empty-state">
+                    <div class="empty-icon">
+                        <i class="fas fa-compass"></i>
+                    </div>
+                    <h3>Pas de quêtes actives</h3>
+                    <p>Vous n'avez aucune quête en cours. Lancez-en une pour commencer votre aventure !</p>
+                    <a href="tasks.html" class="btn btn-primary">
+                        <i class="fas fa-plus"></i> Ajouter une quête
+                    </a>
+                </div>
+            `;
+            return;
+        }
+
+        // Afficher les 3 dernières tâches
+        const recentTasks = tasks.slice().reverse().slice(0, 3);
+
+        recentTasks.forEach((task, index) => {
+            const taskCard = document.createElement('div');
+            taskCard.className = `task-card ${task.completed ? 'task-completed' : ''}`;
+            taskCard.innerHTML = `
+                <div class="task-header">
+                    <div class="task-icon">
+                        ${task.completed ? '<i class="fas fa-check-circle"></i>' : '<i class="fas fa-circle"></i>'}
+                    </div>
+                    <h3 class="task-title">${task.title}</h3>
+                    <span class="task-category ${task.category}">
+                        ${task.category === 'daily' ? 'Quête Quotidienne' : 'Quête Ponctuelle'}
+                    </span>
+                </div>
+                <p class="task-description">${task.description || 'Aucune description'}</p>
+                <div class="task-footer">
+                    <div class="task-meta">
+                        <span class="task-points">+${task.points} XP</span>
+                        <span class="task-difficulty">
+                            ${task.category === 'daily' ? '⚔️⚔️⚔️' : '⚔️⚔️'}
+                        </span>
+                    </div>
+                    <button class="btn ${task.completed ? 'btn-success' : 'btn-primary'}"
+                            onclick="toggleTask(${tasks.indexOf(task)})">
+                        ${task.completed ? '<i class="fas fa-check"></i> Accomplie' : '<i class="fas fa-flag"></i> Terminer'}
+                    </button>
+                </div>
+            `;
+            grid.appendChild(taskCard);
+        });
+    }
+
+    // Valider/dévalider une quête
+    function toggleTask(index) {
+        const task = tasks[index];
+        task.completed = !task.completed;
+
+        if (task.completed) {
+            totalPoints += task.points;
+            // Débloquer un badge si c'est une quête quotidienne
+            if (task.category === 'daily') {
+                badges.push({
+                    name: "Premier Pas",
+                    points: 10,
+                    icon: "fa-trophy",
+                    color: "#f59e0b"
+                });
+            }
+        } else {
+            totalPoints -= task.points;
+        }
+
+        saveData();
+        renderTasks();
+        renderBadges();
+        updatePointsDisplay();
+    }
+
+    // Supprimer une quête
+    function deleteTask(index) {
+        const task = tasks[index];
+        if (task.completed) {
+            totalPoints -= task.points;
+        }
+        tasks.splice(index, 1);
+        saveData();
+        renderTasks();
+        updatePointsDisplay();
+    }
+
+    // Rendre les badges récents
+    function renderBadges() {
+        const badgesGrid = document.getElementById('recent-badges');
+        badgesGrid.innerHTML = '';
+
+        if (badges.length === 0) {
+            badgesGrid.innerHTML = `
+                <div class="empty-state">
+                    <div class="empty-icon">
+                        <i class="fas fa-medal"></i>
+                    </div>
+                    <h3>Aucune récompense</h3>
+                    <p>Terminez des quêtes pour débloquer des badges légendaires !</p>
+                    <a href="tasks.html" class="btn btn-warning">
+                        <i class="fas fa-sword"></i> Voir les quêtes
+                    </a>
+                </div>
+            `;
+            return;
+        }
+
+        // Afficher les 3 derniers badges
+        const recentBadges = badges.slice().reverse().slice(0, 3);
+
+        recentBadges.forEach(badge => {
+            const badgeCard = document.createElement('div');
+            badgeCard.className = 'badge-card';
+            badgeCard.innerHTML = `
+                <div class="badge-icon" style="background-color: ${badge.color || '#3b82f6'}">
+                    <i class="fas ${badge.icon}"></i>
+                </div>
+                <h3 class="badge-name">${badge.name}</h3>
+                <span class="badge-points">+${badge.points} XP</span>
+            `;
+            badgesGrid.appendChild(badgeCard);
+        });
+    }
+
+    // Initialisation
+    document.addEventListener('DOMContentLoaded', function() {
+        renderTasks();
+        renderBadges();
+        updatePointsDisplay();
+
+        // Animation des éléments au chargement
+        const elements = document.querySelectorAll('.task-card, .badge-card');
+        elements.forEach((el, index) => {
+            el.style.animationDelay = `${index * 0.1}s`;
+            el.style.animation = 'fadeInUp 0.6s ease forwards';
+        });
+    });
+    </script>
+</body>
+</html>
