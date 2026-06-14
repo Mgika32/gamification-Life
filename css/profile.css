@@ -22,22 +22,29 @@
 }
 
 /* ===== BORDURES DYNAMIQUES POUR LES CADRES ===== */
-.profile-hero-avatar {
-    width: 120px;
-    height: 120px;
+.profile-hero-avatar-container {
+    width: 140px;
+    height: 140px;
+    margin: 0 auto 1.5rem;
     border-radius: 50%;
-    background: var(--current-accent);
     display: flex;
     align-items: center;
     justify-content: center;
-    font-size: 3rem;
-    color: #0f0f1a;
-    border: 4px solid var(--current-border); /* Bordure dynamique */
-    box-shadow: 0 0 20px var(--current-border);
+    background: linear-gradient(135deg, #2a2a4a 0%, #1a1a2e 100%);
+    transition: all 0.3s ease;
     position: relative;
-    z-index: 1;
-    flex-shrink: 0;
 }
+
+.profile-hero-avatar {
+    font-size: 3.5rem;
+    color: #d4af37;
+    width: 100%;
+    height: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
 
 /* Styles spécifiques pour chaque cadre */
 .gold-frame {
@@ -405,4 +412,56 @@
 @media (max-width: 768px) {
     .profile-hero { flex-direction: column; text-align: center; }
     .stats-grid { grid-template-columns: repeat(2, 1fr); }
+}
+
+/* --- STYLES DES CADRES (identiques à customize.css) --- */
+.profile-hero-avatar-container.frame-bois {
+    border: 4px solid #8B4513;
+    box-shadow: 0 0 20px rgba(139, 69, 19, 0.5);
+}
+
+.profile-hero-avatar-container.frame-pierre {
+    border: 4px solid #6b7280;
+    box-shadow: 0 0 20px rgba(107, 114, 128, 0.5);
+}
+
+.profile-hero-avatar-container.frame-bronze {
+    border: 4px solid #cd7f32;
+    box-shadow: 0 0 20px rgba(205, 127, 50, 0.5);
+}
+
+.profile-hero-avatar-container.frame-argent {
+    border: 4px solid #c0c0c0;
+    box-shadow: 0 0 20px rgba(192, 192, 192, 0.5);
+}
+
+.profile-hero-avatar-container.frame-or {
+    border: 4px solid #ffd700;
+    box-shadow: 0 0 25px rgba(255, 215, 0, 0.6);
+}
+
+.profile-hero-avatar-container.frame-rubis {
+    border: 4px solid #e11d48;
+    box-shadow: 0 0 25px rgba(225, 29, 72, 0.6), inset 0 0 15px rgba(225, 29, 72, 0.3);
+}
+
+.profile-hero-avatar-container.frame-saphir {
+    border: 4px solid #2563eb;
+    box-shadow: 0 0 25px rgba(37, 99, 235, 0.6), inset 0 0 15px rgba(37, 99, 235, 0.3);
+}
+
+.profile-hero-avatar-container.frame-legendaire {
+    border: 4px solid transparent;
+    background: linear-gradient(#1a1a2e, #1a1a2e) padding-box,
+                linear-gradient(45deg, #ff0000, #ff7f00, #ffff00, #00ff00, #0000ff, #4b0082, #9400d3) border-box;
+    animation: rainbow-border 3s linear infinite;
+    box-shadow: 0 0 30px rgba(255, 215, 0, 0.5);
+}
+
+@keyframes rainbow-border {
+    0% { background: linear-gradient(#1a1a2e, #1a1a2e) padding-box, linear-gradient(45deg, #ff0000, #ff7f00, #ffff00, #00ff00, #0000ff, #4b0082, #9400d3) border-box; }
+    25% { background: linear-gradient(#1a1a2e, #1a1a2e) padding-box, linear-gradient(45deg, #9400d3, #ff0000, #ff7f00, #ffff00, #00ff00, #0000ff, #4b0082) border-box; }
+    50% { background: linear-gradient(#1a1a2e, #1a1a2e) padding-box, linear-gradient(45deg, #4b0082, #9400d3, #ff0000, #ff7f00, #ffff00, #00ff00, #0000ff) border-box; }
+    75% { background: linear-gradient(#1a1a2e, #1a1a2e) padding-box, linear-gradient(45deg, #0000ff, #4b0082, #9400d3, #ff0000, #ff7f00, #ffff00, #00ff00) border-box; }
+    100% { background: linear-gradient(#1a1a2e, #1a1a2e) padding-box, linear-gradient(45deg, #00ff00, #0000ff, #4b0082, #9400d3, #ff0000, #ff7f00, #ffff00) border-box; }
 }

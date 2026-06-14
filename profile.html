@@ -35,12 +35,9 @@
 
             <!-- Hero Banner avec customisation -->
             <div class="profile-hero" id="profile-hero">
-                <div class="profile-hero-avatar-container">
-                    <div class="profile-hero-avatar" id="profile-avatar">
+                <div class="profile-hero-avatar-container preview-avatar-container" id="profile-avatar-container">
+                    <div class="profile-hero-avatar preview-avatar" id="profile-avatar">
                         <i class="fas fa-dragon"></i>
-                    </div>
-                    <div class="profile-hero-frame" id="profile-frame">
-                        <!-- Le cadre est ajouté via JavaScript -->
                     </div>
                 </div>
                 <div class="profile-hero-info">
@@ -199,33 +196,15 @@
         document.getElementById('profile-avatar').innerHTML = `<i class="fas ${customization.avatar}"></i>`;
         document.getElementById('profile-title').textContent = customization.title;
 
+        // Appliquer la couleur d'accentuation
         document.documentElement.style.setProperty('--current-accent', customization.color);
+
         // Appliquer le cadre via une classe CSS
         if (customization.frame) {
-            document.getElementById('profile-frame').className = `profile-hero-frame ${customization.frame}`;
-
-            // Définir la couleur de la bordure en fonction du cadre
-            if (customization.frame === "gold-frame") {
-                document.documentElement.style.setProperty('--current-border', '#daa520'); // Or
-            } else if (customization.frame === "silver-frame") {
-                document.documentElement.style.setProperty('--current-border', '#a9a9a9'); // Argent
-            } else if (customization.frame === "bronze-frame") {
-                document.documentElement.style.setProperty('--current-border', '#a0522d'); // Bronze
-            } else if (customization.frame === "legendaire") {
-                document.documentElement.style.setProperty('--current-border', 'transparent'); // Pas de couleur pour l'arc-en-ciel
-            } else {
-                // Couleur par défaut (ex: bois, fer, etc.)
-                document.documentElement.style.setProperty('--current-border', '#5D2906'); // Bois
-            }
+            const frameClass = customization.frame.replace('frame', '').trim();
+            document.getElementById('profile-avatar-container').className = `profile-hero-avatar-container preview-avatar-container frame-${frameClass}`;
         }
-
-
-
-        // Appliquer le cadre si sélectionné
-        if (customization.frame) {
-            document.getElementById('profile-frame').className = `profile-hero-frame ${customization.frame}`;
-        }
-    });
+            });
 </script>
 
 </body>
