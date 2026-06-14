@@ -1,0 +1,408 @@
+
+.profile-hero {
+    background: linear-gradient(135deg, var(--primary-color), var(--current-accent));
+    border: 2px solid #f59e0b;
+    border-radius: 16px;
+    padding: 2rem;
+    margin-bottom: 2rem;
+    display: flex;
+    align-items: center;
+    gap: 2rem;
+    box-shadow: 0 0 30px rgba(245, 158, 11, 0.15), inset 0 0 60px rgba(0,0,0,0.5);
+    position: relative;
+    overflow: hidden;
+}
+
+.profile-hero::before {
+    content: '';
+    position: absolute;
+    top: 0; left: 0; right: 0; bottom: 0;
+    background: url("data:image/svg+xml,%3Csvg width='60' height='60' viewBox='0 0 60 60' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='none' fill-rule='evenodd'%3E%3Cg fill='%23f59e0b' fill-opacity='0.05'%3E%3Cpath d='M36 34v-4h-2v4h-4v2h4v4h2v-4h4v-2h-4zm0-30V0h-2v4h-4v2h4v4h2V6h4V4h-4zM6 34v-4H4v4H0v2h4v4h2v-4h4v-2H6zM6 4V0H4v4H0v2h4v4h2V6h4V4H6z'/%3E%3C/g%3E%3C/g%3E%3C/svg%3E");
+    pointer-events: none;
+}
+
+/* ===== BORDURES DYNAMIQUES POUR LES CADRES ===== */
+.profile-hero-avatar {
+    width: 120px;
+    height: 120px;
+    border-radius: 50%;
+    background: var(--current-accent);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 3rem;
+    color: #0f0f1a;
+    border: 4px solid var(--current-border); /* Bordure dynamique */
+    box-shadow: 0 0 20px var(--current-border);
+    position: relative;
+    z-index: 1;
+    flex-shrink: 0;
+}
+
+/* Styles spécifiques pour chaque cadre */
+.gold-frame {
+    --current-accent: #ffd700;
+}
+
+.silver-frame {
+    --current-accent: #c0c0c0;
+}
+
+.bronze-frame {
+    --current-accent: #cd7f32;
+}
+
+.rainbow-border {
+    --current-accent: transparent;
+    border: 4px solid transparent;
+    background: conic-gradient(
+        from 0deg,
+        #ff0000, #ff7f00, #ffff00, #00ff00, #0000ff, #4b0082, #9400d3, #ff0000
+    );
+    animation: rotateRainbow 4s linear infinite;
+}
+
+.bois-frame {
+    --current-accent: #8B4513;
+}
+
+.pierre-frame {
+    --current-accent: #6b7280;
+}
+
+.rubis-frame {
+    --current-accent: #e11d48;
+}
+
+.saphir-frame {
+    --current-accent: #2563eb;
+}
+
+.legendaire-frame {
+    --current-accent: transparent;
+    border: 4px solid transparent;
+    background: linear-gradient(#1a1a2e, #1a1a2e) padding-box,
+                linear-gradient(45deg, #ff0000, #ff7f00, #ffff00, #00ff00, #0000ff, #4b0082, #9400d3) border-box;
+    animation: rainbow-border 3s linear infinite;
+}
+
+/* Animation pour l'arc-en-ciel */
+@keyframes rotateRainbow {
+    from { transform: rotate(0deg); }
+    to { transform: rotate(360deg); }
+}
+
+
+.profile-hero-info {
+    flex: 1;
+    position: relative;
+    z-index: 1;
+}
+
+.profile-hero-name {
+    font-family: 'UnifrakturMaguntia', cursive;
+    font-size: 2.5rem;
+    color: var(--current-accent);
+    margin: 0 0 0.5rem 0;
+    text-shadow: 2px 2px 4px rgba(0,0,0,0.5);
+}
+
+.profile-hero-level {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.5rem;
+    background: rgba(245, 158, 11, 0.15);
+    border: 1px solid var(--current-accent);
+    border-radius: 20px;
+    padding: 0.4rem 1rem;
+    color: var(--current-accent);
+    font-size: 0.9rem;
+    margin-bottom: 1rem;
+}
+
+/* ===== BARRE XP ===== */
+.xp-progress-bar {
+    background: #0f0f1a;
+    border-radius: 10px;
+    height: 20px;
+    border: 1px solid #333;
+    position: relative;
+    overflow: hidden;
+}
+
+.xp-progress-fill {
+    height: 100%;
+    background: linear-gradient(90deg, #f59e0b, #fbbf24);
+    border-radius: 10px;
+    transition: width 0.6s ease;
+}
+
+.xp-progress-fill::after {
+    content: '';
+    position: absolute;
+    top: 0; left: 0; right: 0; bottom: 0;
+    background: linear-gradient(90deg, transparent 0%, rgba(255,255,255,0.2) 50%, transparent 100%);
+    animation: shimmer 2s infinite;
+}
+
+@keyframes shimmer {
+    0%   { transform: translateX(-100%); }
+    100% { transform: translateX(100%); }
+}
+
+.xp-progress-text {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    color: #fff;
+    font-size: 0.75rem;
+    font-weight: bold;
+    text-shadow: 1px 1px 2px rgba(0,0,0,0.8);
+    white-space: nowrap;
+}
+
+/* ===== STAT CARDS ===== */
+.stats-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+    gap: 1.5rem;
+    margin-bottom: 2rem;
+}
+
+.stat-card {
+    background: linear-gradient(135deg, #1a1a2e 0%, #16162a 100%);
+    border: 2px solid #333;
+    border-radius: 12px;
+    padding: 1.5rem;
+    text-align: center;
+    transition: all 0.3s ease;
+    position: relative;
+    overflow: hidden;
+}
+
+.stat-card::before {
+    content: '';
+    position: absolute;
+    top: 0; left: 0; right: 0;
+    height: 3px;
+    background: linear-gradient(90deg, transparent, #f59e0b, transparent);
+    opacity: 0;
+    transition: opacity 0.3s ease;
+}
+
+.stat-card:hover {
+    border-color: #f59e0b;
+    transform: translateY(-4px);
+    box-shadow: 0 10px 30px rgba(245, 158, 11, 0.2);
+}
+
+.stat-card:hover::before { opacity: 1; }
+
+.stat-card-icon {
+    font-size: 2.2rem;
+    color: #f59e0b;
+    margin-bottom: 0.8rem;
+}
+
+.stat-card-value {
+    font-family: 'UnifrakturMaguntia', cursive;
+    font-size: 2rem;
+    color: #fff;
+    margin-bottom: 0.3rem;
+}
+
+.stat-card-label {
+    color: #9ca3af;
+    font-size: 0.8rem;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+}
+
+/* ===== PARCHEMIN STATS ===== */
+.profile-parchment {
+    background: linear-gradient(180deg, #f5e6c8 0%, #e8d5b0 100%);
+    border-radius: 12px;
+    padding: 2rem;
+    margin-bottom: 2rem;
+    box-shadow: 0 4px 20px rgba(0,0,0,0.3), inset 0 0 100px rgba(139,90,43,0.1);
+    position: relative;
+    border: 3px solid #8b5a2b;
+}
+
+.profile-parchment::before {
+    content: '';
+    position: absolute;
+    top: 10px; left: 10px; right: 10px; bottom: 10px;
+    border: 2px dashed #8b5a2b;
+    border-radius: 8px;
+    pointer-events: none;
+    opacity: 0.5;
+}
+
+.parchment-title {
+    font-family: 'UnifrakturMaguntia', cursive;
+    font-size: 1.8rem;
+    color: #5c3d2e;
+    text-align: center;
+    margin-bottom: 1.5rem;
+}
+
+.parchment-stats { display: grid; gap: 1.2rem; }
+
+.parchment-stat {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+}
+
+.parchment-stat-icon {
+    width: 40px;
+    height: 40px;
+    background: #5c3d2e;
+    border-radius: 8px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: #f5e6c8;
+    font-size: 1.1rem;
+    flex-shrink: 0;
+}
+
+.parchment-stat-info { flex: 1; }
+
+.parchment-stat-header {
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: 0.4rem;
+}
+
+.parchment-stat-label { color: #5c3d2e; font-weight: 600; font-size: 0.9rem; }
+.parchment-stat-value { color: #8b5a2b; font-weight: bold; font-size: 0.9rem; }
+
+.progress-bar-container {
+    background: #d4c4a8;
+    border-radius: 6px;
+    height: 12px;
+    overflow: hidden;
+    border: 1px solid #b8a07a;
+}
+
+.progress-bar-fill {
+    height: 100%;
+    background: linear-gradient(90deg, #8b5a2b, #c49a6c);
+    border-radius: 6px;
+    transition: width 0.5s ease;
+}
+
+/* ===== ACTIONS ===== */
+.profile-actions {
+    display: flex;
+    gap: 1rem;
+    margin-top: 1.5rem;
+    flex-wrap: wrap;
+}
+
+.btn-reset {
+    background: linear-gradient(135deg, #dc2626, #b91c1c);
+    color: #fff;
+    border: none;
+    padding: 0.6rem 1.2rem;
+    border-radius: 8px;
+    cursor: pointer;
+    font-size: 0.9rem;
+    transition: all 0.3s ease;
+    display: inline-flex;
+    align-items: center;
+    gap: 0.5rem;
+}
+
+.btn-reset:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 5px 15px rgba(220,38,38,0.4);
+}
+
+/* ===== SUCCÈS RÉCENTS ===== */
+.success-section {
+    background: linear-gradient(135deg, #1a1a2e 0%, #0f0f1a 100%);
+    border: 2px solid #f59e0b;
+    border-radius: 16px;
+    padding: 2rem;
+    box-shadow: 0 0 30px rgba(245,158,11,0.1);
+    margin-bottom: 2rem;
+}
+
+.success-section-title {
+    font-family: 'UnifrakturMaguntia', cursive;
+    font-size: 1.8rem;
+    color: #f59e0b;
+    margin-bottom: 1.5rem;
+    display: flex;
+    align-items: center;
+    gap: 0.8rem;
+}
+
+.recent-badges-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(260px, 1fr));
+    gap: 1rem;
+}
+
+.recent-badge-card {
+    background: linear-gradient(135deg, #252540 0%, #1a1a2e 100%);
+    border: 1px solid #333;
+    border-radius: 10px;
+    padding: 1.2rem;
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+    transition: all 0.3s ease;
+}
+
+.recent-badge-card:hover {
+    border-color: #f59e0b;
+    transform: translateX(5px);
+}
+
+.recent-badge-icon {
+    width: 50px;
+    height: 50px;
+    border-radius: 10px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 1.5rem;
+    color: #0f0f1a;
+    flex-shrink: 0;
+}
+
+.recent-badge-info h4 {
+    color: #f59e0b;
+    margin: 0 0 0.3rem 0;
+    font-size: 1rem;
+}
+
+.recent-badge-info p {
+    color: #9ca3af;
+    margin: 0;
+    font-size: 0.82rem;
+}
+
+.empty-state {
+    text-align: center;
+    padding: 2.5rem;
+    color: #6b7280;
+}
+
+.empty-state i {
+    font-size: 2.5rem;
+    margin-bottom: 1rem;
+    display: block;
+    opacity: 0.4;
+}
+
+/* ===== RESPONSIVE ===== */
+@media (max-width: 768px) {
+    .profile-hero { flex-direction: column; text-align: center; }
+    .stats-grid { grid-template-columns: repeat(2, 1fr); }
+}

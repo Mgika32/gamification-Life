@@ -1,0 +1,606 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>🎨 Personnalisation | Quête Éternelle</title>
+    <link rel="stylesheet" href="css/style.css">
+    <link rel="stylesheet" href="css/customize.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=IM+Fell+English&family=UnifrakturMaguntia&display=swap" rel="stylesheet">
+</head>
+<body>
+
+    <!-- ===== HEADER ===== -->
+    <header class="app-header">
+        <div class="container">
+            <div class="header-content">
+                <div class="logo">
+                    <i class="fas fa-dice-d20"></i> Quête Éternelle
+                </div>
+                <nav class="main-nav">
+                    <a href="index.html" class="nav-link"><i class="fas fa-home"></i> Tableau</a>
+                    <a href="tasks.html" class="nav-link"><i class="fas fa-sword"></i> Quêtes</a>
+                    <a href="badges.html" class="nav-link"><i class="fas fa-medal"></i> Succès</a>
+                    <a href="profile.html" class="nav-link"><i class="fas fa-user"></i> Profil</a>
+                    <a href="customize.html" class="nav-link active"><i class="fas fa-palette"></i> Personnaliser</a>
+                </nav>
+            </div>
+        </div>
+    </header>
+
+    <!-- ===== MAIN CONTENT ===== -->
+    <main class="container">
+        <section class="profile-section">
+            <div class="section-header">
+                <i class="fas fa-palette"></i>
+                <h2>Personnalisation</h2>
+                <p>Customisez votre avatar et votre profil</p>
+            </div>
+
+            <div class="customize-container">
+                <!-- ===== PREVIEW PANEL ===== -->
+                <div class="preview-panel">
+                    <div class="preview-card">
+                        <div class="preview-title">
+                            <i class="fas fa-eye"></i> Aperçu
+                        </div>
+                        <div class="preview-avatar-container" id="previewAvatar">
+                            <i class="fas fa-dragon preview-avatar" id="previewIcon"></i>
+                        </div>
+                        <div class="preview-name">Aventurier</div>
+                        <div class="preview-title-text" id="previewTitleText">Aventurier</div>
+                        <div class="preview-points">
+                            <i class="fas fa-star"></i> <span id="previewXP">0</span> XP
+                        </div>
+                    </div>
+                </div>
+
+                <!-- ===== OPTIONS PANEL ===== -->
+                <div class="options-panel">
+                    <div class="customize-tabs">
+                        <button class="tab-btn active" data-tab="avatars">
+                            <i class="fas fa-user"></i> Avatars
+                        </button>
+                        <button class="tab-btn" data-tab="cadres">
+                            <i class="fas fa-border-all"></i> Cadres
+                        </button>
+                        <button class="tab-btn" data-tab="titres">
+                            <i class="fas fa-crown"></i> Titres
+                        </button>
+                        <button class="tab-btn" data-tab="couleurs">
+                            <i class="fas fa-paint-brush"></i> Couleurs
+                        </button>
+                    </div>
+
+                    <!-- Tab: Avatars -->
+                    <div class="tab-content active" id="avatars">
+                        <div class="customize-item avatar-item selected" data-avatar="fa-dragon" data-cost="0">
+                            <i class="fas fa-dragon item-icon"></i>
+                            <div class="item-name">Dragon</div>
+                            <div class="item-cost free">Gratuit</div>
+                        </div>
+                        <div class="customize-item avatar-item" data-avatar="fa-user-ninja" data-cost="0">
+                            <i class="fas fa-user-ninja item-icon"></i>
+                            <div class="item-name">Ninja</div>
+                            <div class="item-cost free">Gratuit</div>
+                        </div>
+                        <div class="customize-item avatar-item" data-avatar="fa-hat-wizard" data-cost="0">
+                            <i class="fas fa-hat-wizard item-icon"></i>
+                            <div class="item-name">Sorcier</div>
+                            <div class="item-cost free">Gratuit</div>
+                        </div>
+                        <div class="customize-item avatar-item" data-avatar="fa-skull" data-cost="0">
+                            <i class="fas fa-skull item-icon"></i>
+                            <div class="item-name">Squelette</div>
+                            <div class="item-cost free">Gratuit</div>
+                        </div>
+                        <div class="customize-item avatar-item locked" data-avatar="fa-ghost" data-cost="50">
+                            <i class="fas fa-ghost item-icon"></i>
+                            <div class="item-name">Fantôme</div>
+                            <div class="item-cost">50 XP</div>
+                        </div>
+                        <div class="customize-item avatar-item locked" data-avatar="fa-robot" data-cost="50">
+                            <i class="fas fa-robot item-icon"></i>
+                            <div class="item-name">Robot</div>
+                            <div class="item-cost">50 XP</div>
+                        </div>
+                        <div class="customize-item avatar-item locked" data-avatar="fa-frog" data-cost="100">
+                            <i class="fas fa-frog item-icon"></i>
+                            <div class="item-name">Grenouille</div>
+                            <div class="item-cost">100 XP</div>
+                        </div>
+                        <div class="customize-item avatar-item locked" data-avatar="fa-cat" data-cost="100">
+                            <i class="fas fa-cat item-icon"></i>
+                            <div class="item-name">Chat</div>
+                            <div class="item-cost">100 XP</div>
+                        </div>
+                        <div class="customize-item avatar-item locked" data-avatar="fa-crow" data-cost="200">
+                            <i class="fas fa-crow item-icon"></i>
+                            <div class="item-name">Corbeau</div>
+                            <div class="item-cost">200 XP</div>
+                        </div>
+                        <div class="customize-item avatar-item locked" data-avatar="fa-spider" data-cost="200">
+                            <i class="fas fa-spider item-icon"></i>
+                            <div class="item-name">Araignée</div>
+                            <div class="item-cost">200 XP</div>
+                        </div>
+                        <div class="customize-item avatar-item locked" data-avatar="fa-horse-head" data-cost="500">
+                            <i class="fas fa-horse-head item-icon"></i>
+                            <div class="item-name">Cheval</div>
+                            <div class="item-cost">500 XP</div>
+                        </div>
+                        <div class="customize-item avatar-item locked" data-avatar="fa-otter" data-cost="500">
+                            <i class="fas fa-otter item-icon"></i>
+                            <div class="item-name">Loutre</div>
+                            <div class="item-cost">500 XP</div>
+                        </div>
+                    </div>
+
+                    <!-- Tab: Cadres -->
+                    <div class="tab-content" id="cadres">
+                        <div class="customize-item frame-item selected" data-frame="bois" data-cost="0">
+                            <div class="item-preview"><i class="fas fa-square"></i></div>
+                            <div class="item-name">Bois</div>
+                            <div class="item-cost free">Gratuit</div>
+                        </div>
+                        <div class="customize-item frame-item" data-frame="pierre" data-cost="0">
+                            <div class="item-preview"><i class="fas fa-square"></i></div>
+                            <div class="item-name">Pierre</div>
+                            <div class="item-cost free">Gratuit</div>
+                        </div>
+                        <div class="customize-item frame-item locked" data-frame="bronze" data-cost="25">
+                            <div class="item-preview"><i class="fas fa-square"></i></div>
+                            <div class="item-name">Bronze</div>
+                            <div class="item-cost">25 XP</div>
+                        </div>
+                        <div class="customize-item frame-item locked" data-frame="argent" data-cost="75">
+                            <div class="item-preview"><i class="fas fa-square"></i></div>
+                            <div class="item-name">Argent</div>
+                            <div class="item-cost">75 XP</div>
+                        </div>
+                        <div class="customize-item frame-item locked" data-frame="or" data-cost="150">
+                            <div class="item-preview"><i class="fas fa-square"></i></div>
+                            <div class="item-name">Or</div>
+                            <div class="item-cost">150 XP</div>
+                        </div>
+                        <div class="customize-item frame-item locked" data-frame="rubis" data-cost="300">
+                            <div class="item-preview"><i class="fas fa-gem"></i></div>
+                            <div class="item-name">Rubis</div>
+                            <div class="item-cost">300 XP</div>
+                        </div>
+                        <div class="customize-item frame-item locked" data-frame="saphir" data-cost="400">
+                            <div class="item-preview"><i class="fas fa-gem"></i></div>
+                            <div class="item-name">Saphir</div>
+                            <div class="item-cost">400 XP</div>
+                        </div>
+                    </div>
+
+                    <!-- Tab: Titres -->
+                    <div class="tab-content" id="titres">
+                        <div class="customize-item title-item selected" data-title="Aventurier" data-cost="0">
+                            <i class="fas fa-compass item-icon"></i>
+                            <div class="item-name">Aventurier</div>
+                            <div class="item-cost free">Gratuit</div>
+                        </div>
+                        <div class="customize-item title-item locked" data-title="Voyageur" data-cost="25">
+                            <i class="fas fa-compass item-icon"></i>
+                            <div class="item-name">Voyageur</div>
+                            <div class="item-cost">25 XP</div>
+                        </div>
+                        <div class="customize-item title-item locked" data-title="Guerrier" data-cost="50">
+                            <i class="fas fa-shield-halved item-icon"></i>
+                            <div class="item-name">Guerrier</div>
+                            <div class="item-cost">50 XP</div>
+                        </div>
+                        <div class="customize-item title-item locked" data-title="Champion" data-cost="100">
+                            <i class="fas fa-trophy item-icon"></i>
+                            <div class="item-name">Champion</div>
+                            <div class="item-cost">100 XP</div>
+                        </div>
+                        <div class="customize-item title-item locked" data-title="Héros" data-cost="200">
+                            <i class="fas fa-medal item-icon"></i>
+                            <div class="item-name">Héros</div>
+                            <div class="item-cost">200 XP</div>
+                        </div>
+                        <div class="customize-item title-item locked" data-title="Légende" data-cost="350">
+                            <i class="fas fa-star item-icon"></i>
+                            <div class="item-name">Légende</div>
+                            <div class="item-cost">350 XP</div>
+                        </div>
+                        <div class="customize-item title-item locked" data-title="Mythique" data-cost="500">
+                            <i class="fas fa-dragon item-icon"></i>
+                            <div class="item-name">Mythique</div>
+                            <div class="item-cost">500 XP</div>
+                        </div>
+                        <div class="customize-item title-item locked" data-title="Éternel" data-cost="750">
+                            <i class="fas fa-infinity item-icon"></i>
+                            <div class="item-name">Éternel</div>
+                            <div class="item-cost">750 XP</div>
+                        </div>
+                    </div>
+
+                    <!-- Tab: Couleurs -->
+                    <div class="tab-content" id="couleurs">
+                        <div class="customize-item color-item selected" data-color="#f59e0b">
+                            <div class="item-preview" style="background: #f59e0b;"></div>
+                            <div class="item-name">Or</div>
+                        </div>
+                        <div class="customize-item color-item" data-color="#10b981">
+                            <div class="item-preview" style="background: #10b981;"></div>
+                            <div class="item-name">Émeraude</div>
+                        </div>
+                        <div class="customize-item color-item" data-color="#8b5cf6">
+                            <div class="item-preview" style="background: #8b5cf6;"></div>
+                            <div class="item-name">Violet</div>
+                        </div>
+                        <div class="customize-item color-item" data-color="#ef4444">
+                            <div class="item-preview" style="background: #ef4444;"></div>
+                            <div class="item-name">Rouge</div>
+                        </div>
+                        <div class="customize-item color-item" data-color="#06b6d4">
+                            <div class="item-preview" style="background: #06b6d4;"></div>
+                            <div class="item-name">Cyan</div>
+                        </div>
+                        <div class="customize-item color-item" data-color="#f97316">
+                            <div class="item-preview" style="background: #f97316;"></div>
+                            <div class="item-name">Orange</div>
+                        </div>
+                        <div class="customize-item color-item" data-color="#ec4899">
+                            <div class="item-preview" style="background: #ec4899;"></div>
+                            <div class="item-name">Rose</div>
+                        </div>
+                        <div class="customize-item color-item" data-color="#84cc16">
+                            <div class="item-preview" style="background: #84cc16;"></div>
+                            <div class="item-name">Vert</div>
+                        </div>
+                        <div class="customize-item color-item" data-color="#f8fafc">
+                            <div class="item-preview" style="background: #f8fafc;"></div>
+                            <div class="item-name">Blanc</div>
+                        </div>
+                    </div>
+
+                    <button class="save-btn" id="saveBtn">
+                        <i class="fas fa-save"></i> Sauvegarder
+                    </button>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <!-- ===== FOOTER ===== -->
+    <footer>
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-logo">
+                    <i class="fas fa-dragon"></i>
+                    <span>Quête Éternelle</span>
+                </div>
+                <p>&copy; 2024 Quête Éternelle - L'aventure vous attend!</p>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        // ===== DONNÉES =====
+        const avatars = [
+            { icon: 'fa-dragon', cost: 0 },
+            { icon: 'fa-user-ninja', cost: 0 },
+            { icon: 'fa-hat-wizard', cost: 0 },
+            { icon: 'fa-skull', cost: 0 },
+            { icon: 'fa-ghost', cost: 50 },
+            { icon: 'fa-robot', cost: 50 },
+            { icon: 'fa-frog', cost: 100 },
+            { icon: 'fa-cat', cost: 100 },
+            { icon: 'fa-crow', cost: 200 },
+            { icon: 'fa-spider', cost: 200 },
+            { icon: 'fa-horse-head', cost: 500 },
+            { icon: 'fa-otter', cost: 500 }
+        ];
+
+        const frames = [
+            { id: 'bois', cost: 0 },
+            { id: 'pierre', cost: 0 },
+            { id: 'bronze', cost: 25 },
+            { id: 'argent', cost: 75 },
+            { id: 'or', cost: 150 },
+            { id: 'rubis', cost: 300 },
+            { id: 'saphir', cost: 400 },
+            { id: 'legendaire', cost: 600 }
+        ];
+
+        const titles = [
+            { name: 'Aventurier', cost: 0 },
+            { name: 'Voyageur', cost: 25 },
+            { name: 'Guerrier', cost: 50 },
+            { name: 'Champion', cost: 100 },
+            { name: 'Héros', cost: 200 },
+            { name: 'Légende', cost: 350 },
+            { name: 'Mythique', cost: 500 },
+            { name: 'Éternel', cost: 750 }
+        ];
+
+        // ===== ÉTAT =====
+        let currentXP = parseInt(localStorage.getItem('totalPoints')) || 0;
+        let selectedAvatar = 'fa-dragon';
+        let selectedFrame = null;
+        let selectedTitle = 'Aventurier';
+        let selectedColor = '#f59e0b';
+
+        // ===== DOM =====
+        const previewAvatar = document.getElementById('previewAvatar');
+        const previewIcon = document.getElementById('previewIcon');
+        const previewTitleText = document.getElementById('previewTitleText');
+        const previewXP = document.getElementById('previewXP');
+
+        // ===== INITIALISATION =====
+        function init() {
+            loadCustomization();
+            updatePreview();
+            updateUnlocks();
+            setupTabs();
+            setupSelection();
+            setupSave();
+        }
+
+        // Charger la personnalisation sauvegardée
+        function loadCustomization() {
+            const saved = localStorage.getItem('playerCustomization');
+            if (saved) {
+                const data = JSON.parse(saved);
+                selectedAvatar = data.avatar || 'fa-dragon';
+                selectedFrame = data.frame || 'bois';
+                selectedTitle = data.title || 'Aventurier';
+                selectedColor = data.color || '#f59e0b';
+            }
+        }
+
+        // Mettre à jour l'aperçu
+        function updatePreview() {
+            previewIcon.className = `fas ${selectedAvatar} preview-avatar`;
+
+            // Enlever toutes les classes de frame
+            previewAvatar.className = 'preview-avatar-container';
+            if (selectedFrame) { 
+                previewAvatar.classList.add(`frame-${selectedFrame}`);
+            }
+
+            previewTitleText.textContent = selectedTitle;
+            previewXP.textContent = currentXP;
+
+            // Appliquer la couleur
+            previewAvatar.style.boxShadow = getComputedStyle(previewAvatar).boxShadow + `, inset 0 0 20px ${selectedColor}33`;
+        }
+        // Mettre à jour les déverrouillages selon les XP
+        function updateUnlocks() {
+            // Avatars
+            document.querySelectorAll('.avatar-item').forEach(item => {
+                const cost = parseInt(item.dataset.cost);
+                if (currentXP >= cost) {
+                    item.classList.remove('locked');
+                }
+            });
+
+            // Cadres
+            document.querySelectorAll('.frame-item').forEach(item => {
+                const cost = parseInt(item.dataset.cost);
+                if (currentXP >= cost) {
+                    item.classList.remove('locked');
+                }
+            });
+
+            // Titres
+            document.querySelectorAll('.title-item').forEach(item => {
+                const cost = parseInt(item.dataset.cost);
+                if (currentXP >= cost) {
+                    item.classList.remove('locked');
+                }
+            });
+        }
+
+        // Gestion des onglets
+        function setupTabs() {
+            const tabs = document.querySelectorAll('.tab-btn');
+            const contents = document.querySelectorAll('.tab-content');
+
+            tabs.forEach(tab => {
+                tab.addEventListener('click', () => {
+                    tabs.forEach(t => t.classList.remove('active'));
+                    contents.forEach(c => c.classList.remove('active'));
+
+                    tab.classList.add('active');
+                    document.getElementById(tab.dataset.tab).classList.add('active');
+                });
+            });
+        }
+
+        // Gestion de la sélection
+        function setupSelection() {
+            // Avatars
+            document.querySelectorAll('.avatar-item').forEach(item => {
+                item.addEventListener('click', () => {
+                    if (item.classList.contains('locked')) return;
+                    document.querySelectorAll('.avatar-item').forEach(i => i.classList.remove('selected'));
+                    item.classList.add('selected');
+                    selectedAvatar = item.dataset.avatar;
+                    updatePreview();
+                });
+            });
+
+            // Cadres
+            document.querySelectorAll('.frame-item').forEach(item => {
+                item.addEventListener('click', () => {
+                    if (item.classList.contains('locked')) return;
+                    document.querySelectorAll('.frame-item').forEach(i => i.classList.remove('selected'));
+                    item.classList.add('selected');
+                    selectedFrame = item.dataset.frame;
+                    updatePreview();
+                });
+            });
+
+            // Titres
+            document.querySelectorAll('.title-item').forEach(item => {
+                item.addEventListener('click', () => {
+                    if (item.classList.contains('locked')) return;
+                    document.querySelectorAll('.title-item').forEach(i => i.classList.remove('selected'));
+                    item.classList.add('selected');
+                    selectedTitle = item.dataset.title;
+                    updatePreview();
+                });
+            });
+
+            // Couleurs
+            document.querySelectorAll('.color-item').forEach(item => {
+                item.addEventListener('click', () => {
+                    document.querySelectorAll('.color-item').forEach(i => i.classList.remove('selected'));
+                    item.classList.add('selected');
+                    selectedColor = item.dataset.color;
+                    updatePreview();
+                });
+            });
+
+            // Appliquer la sélection sauvegardée au chargement
+            applySavedSelection();
+        }
+
+        function applySavedSelection() {
+            // Avatar
+            const savedAvatar = document.querySelector(`.avatar-item[data-avatar="${selectedAvatar}"]`);
+            if (savedAvatar) {
+                document.querySelectorAll('.avatar-item').forEach(i => i.classList.remove('selected'));
+                savedAvatar.classList.add('selected');
+            }
+
+            // Frame
+            const savedFrame = document.querySelector(`.frame-item[data-frame="${selectedFrame}"]`);
+            if (savedFrame) {
+                document.querySelectorAll('.frame-item').forEach(i => i.classList.remove('selected'));
+                savedFrame.classList.add('selected');
+            }
+
+            // Titre
+            const savedTitle = document.querySelector(`.title-item[data-title="${selectedTitle}"]`);
+            if (savedTitle) {
+                document.querySelectorAll('.title-item').forEach(i => i.classList.remove('selected'));
+                savedTitle.classList.add('selected');
+            }
+
+            // Couleur
+            const savedColor = document.querySelector(`.color-item[data-color="${selectedColor}"]`);
+            if (savedColor) {
+                document.querySelectorAll('.color-item').forEach(i => i.classList.remove('selected'));
+                savedColor.classList.add('selected');
+            }
+        }
+
+        // Sauvegarde
+        function setupSave() {
+            document.getElementById('saveBtn').addEventListener('click', () => {
+                const customization = {
+                    avatar: selectedAvatar,
+                    frame: selectedFrame,
+                    title: selectedTitle,
+                    color: selectedColor
+                };
+                localStorage.setItem('playerCustomization', JSON.stringify(customization));
+                
+                // Feedback visuel
+                const btn = document.getElementById('saveBtn');
+                const originalText = btn.innerHTML;
+                btn.innerHTML = '<i class="fas fa-check"></i> Sauvegardé !';
+                btn.style.background = 'linear-gradient(145deg, #10b981 0%, #059669 100%)';
+                
+                setTimeout(() => {
+                    btn.innerHTML = originalText;
+                    btn.style.background = '';
+                }, 2000);
+            });
+        }
+
+        const playerData = {
+            xp: 150, 
+            unlockedTitles: ["Débutant", "Motivé"],
+            unlockedFrames: ["frame1"],
+            unlockedAvatars: ["fa-dragon"]
+        };
+
+        // Items disponibles avec leurs conditions
+        const availableItems = {
+            titles: [
+                { id: "Débutant", icon: "fa-seedling", cost: 0, name: "Débutant" },
+                { id: "Motivé", icon: "fa-fist-raised", cost: 50, name: "Motivé" },
+                { id: "Maître des Quêtes", icon: "fa-crown", cost: 100, name: "Maître des Quêtes" },
+                { id: "Collectionneur", icon: "fa-layer-group", cost: 200, name: "Collectionneur" }
+            ],
+            frames: [
+                { id: "frame1", icon: "fa-border-all", cost: 0, name: "Cadre de bois" },
+                { id: "frame2", icon: "fa-gem", cost: 75, name: "Cadre doré" },
+                { id: "frame3", icon: "fa-star", cost: 150, name: "Cadre étoilé" }
+            ],
+            avatars: [
+                { id: "fa-dragon", icon: "fa-dragon", cost: 0, name: "Dragon" },
+                { id: "fa-knight", icon: "fa-user-knight", cost: 30, name: "Chevalier" },
+                { id: "fa-wizard", icon: "fa-hat-wizard", cost: 60, name: "Magicien" }
+            ]
+        };
+
+        // Fonction pour vérifier si un item est déverrouillé
+        function isUnlocked(itemId, category) {
+            if (category === 'titles') return playerData.unlockedTitles.includes(itemId);
+            if (category === 'frames') return playerData.unlockedFrames.includes(itemId);
+            if (category === 'avatars') return playerData.unlockedAvatars.includes(itemId);
+            return false;
+        }
+
+        // Fonction pour appliquer la customisation
+        function applyCustomization() {
+            const selectedTitle = localStorage.getItem('selectedTitle') || 'Débutant';
+            const selectedFrame = localStorage.getItem('selectedFrame') || 'frame1';
+            const selectedAvatar = localStorage.getItem('selectedAvatar') || 'fa-dragon';
+            const selectedColor = localStorage.getItem('selectedColor') || '#f59e0b';
+
+            // Appliquer la couleur
+            document.documentElement.style.setProperty('--current-accent', selectedColor);
+
+            // Mettre à jour le profil
+            const profileHero = document.querySelector('.profile-hero');
+            if (profileHero) {
+                profileHero.classList.add('customized');
+            }
+        }
+
+        // Initialisation
+        document.addEventListener('DOMContentLoaded', function() {
+            // Appliquer la customisation existante
+            applyCustomization();
+
+            // Gérer les clics sur les items
+            document.querySelectorAll('.item-card').forEach(card => {
+                card.addEventListener('click', function() {
+                    const itemId = this.dataset.id;
+                    const category = this.dataset.category;
+                    const cost = parseInt(this.dataset.cost);
+
+                    if (!isUnlocked(itemId, category)) {
+                        alert("Vous devez débloquer cet item en gagnant plus d'XP !");
+                        return;
+                    }
+
+                    // Sauvegarder la sélection
+                    localStorage.setItem(`selected${category.charAt(0).toUpperCase() + category.slice(1)}`, itemId);
+
+                    // Appliquer immédiatement
+                    applyCustomization();
+                });
+            });
+        });
+
+
+        // Lancer l'initialisation
+        init();
+
+    
+    </script>
+<script defer src="https://static.cloudflareinsights.com/beacon.min.js/v833ccba57c9e4d2798f2e76cebdd09a11778172276447" integrity="sha512-57MDmcccJXYtNnH+ZiBwzC4jb2rvgVCEokYN+L/nLlmO8rfYT/gIpW2A569iJ/3b+0UEasghjuZH/ma3wIs/EQ==" data-cf-beacon='{"version":"2024.11.0","token":"8607d2a720d14b038279025b2b5a82e5","server_timing":{"name":{"cfCacheStatus":true,"cfEdge":true,"cfExtPri":true,"cfL4":true,"cfOrigin":true,"cfSpeedBrain":true},"location_startswith":null}}' crossorigin="anonymous"></script>
+</body>
+</html>

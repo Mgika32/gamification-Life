@@ -3,12 +3,14 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Mes Quêtes</title>
+    <title>Mes Quêtes | Quête Éternelle</title>
     <link rel="stylesheet" href="css/style.css">
+    <link rel="stylesheet" href="css/tasks_styles.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <link href="https://fonts.googleapis.com/css2?family=IM+Fell+English&family=UnifrakturMaguntia&display=swap" rel="stylesheet">
 </head>
 <body>
+    <!-- ===== HEADER ===== -->
     <header class="app-header">
         <div class="container">
             <div class="header-content">
@@ -18,69 +20,143 @@
                 <nav class="main-nav">
                     <a href="index.html" class="nav-link"><i class="fas fa-home"></i> Tableau</a>
                     <a href="tasks.html" class="nav-link active"><i class="fas fa-sword"></i> Quêtes</a>
-                    <a href="badges.html" class="nav-link"><i class="fas fa-medal"></i> Récompenses</a>
+                    <a href="badges.html" class="nav-link"><i class="fas fa-medal"></i> Succès</a>
                     <a href="profile.html" class="nav-link"><i class="fas fa-user"></i> Profil</a>
                 </nav>
             </div>
         </div>
     </header>
 
-    <!-- ===== SECTION QUÊTES AVEC PARCHEMIN ===== -->
+    <!-- ===== HERO SECTION ===== -->
+    <section class="hero-header">
+        <div class="container">
+            <div class="hero-content">
+                <div class="hero-glow"></div>
+                <h1><i class="fas fa-scroll"></i> Journal des Quêtes</h1>
+                <p>De nouvelles aventures vous attendent, aventurier...</p>
+                <div class="points-display">
+                    <div class="xp-icon">
+                        <i class="fas fa-star"></i>
+                    </div>
+                    <div class="xp-text">
+                        <span id="xp-points">0</span> XP
+                    </div>
+                    <div class="level-badge">
+                        <i class="fas fa-layer-group"></i> Niveau <span id="player-level">1</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ===== QUEST STATS BAR ===== -->
+    <div class="quest-stats-bar">
+        <div class="container">
+            <div class="stats-inner">
+                <div class="stat-item">
+                    <i class="fas fa-scroll"></i>
+                    <div class="stat-info">
+                        <span class="stat-value" id="total-quests">0</span>
+                        <span class="stat-label">Quêtes Total</span>
+                    </div>
+                </div>
+                <div class="stat-divider"></div>
+                <div class="stat-item">
+                    <i class="fas fa-check-circle"></i>
+                    <div class="stat-info">
+                        <span class="stat-value" id="completed-quests">0</span>
+                        <span class="stat-label">Terminées</span>
+                    </div>
+                </div>
+                <div class="stat-divider"></div>
+                <div class="stat-item">
+                    <i class="fas fa-coins"></i>
+                    <div class="stat-info">
+                        <span class="stat-value" id="today-points">0</span>
+                        <span class="stat-label">XP Aujourd'hui</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- ===== MAIN CONTENT ===== -->
     <main class="container">
         <section class="tasks-section">
-            <div class="section-header">
-                <h2><i class="fas fa-scroll"></i> Mon Carnet de Quêtes</h2>
-                <p>Lancez de nouvelles quêtes ou marquez les existantes comme accomplies pour gagner des points d'expérience et débloquer des succès.</p>
-            </div>
-
-            <!-- ===== FORMULAIRE DE NOUVELLE QUÊTE ===== -->
-            <div class="parchment">
+            
+            <!-- ===== NOUVELLE QUÊTE (Parchemin) ===== -->
+            <div class="parchment quest-form-parchment">
                 <div class="parchment-header">
                     <i class="fas fa-feather-alt"></i>
                     <h3>Nouvelle Quête</h3>
                 </div>
-                <form id="new-task-form">
-                    <div class="form-group">
-                        <label for="task-title"><i class="fas fa-book"></i> Titre de la Quête</label>
-                        <input type="text" id="task-title" placeholder="Ex: Combattre le dragon noir" required>
+                <form id="new-task-form" class="quest-form">
+                    <div class="form-row">
+                        <div class="form-group quest-title-group">
+                            <label for="task-title"><i class="fas fa-exclamation-circle"></i> Titre de la Quête</label>
+                            <input type="text" id="task-title" placeholder="Ex: Vaincre le dragon..." required>
+                        </div>
+                        <div class="form-group quest-category-group">
+                            <label for="task-category"><i class="fas fa-shield-alt"></i> Type de Quête</label>
+                            <select id="task-category">
+                                <option value="daily">Quotidienne ⚔️</option>
+                                <option value="once">Unique 🏆</option>
+                            </select>
+                        </div>
                     </div>
                     <div class="form-group">
-                        <label for="task-description"><i class="fas fa-parchment"></i> Description</label>
-                        <textarea id="task-description" placeholder="Détails de la quête..." rows="3"></textarea>
+                        <label for="task-description"><i class="fas fa-book-open"></i> Description</label>
+                        <textarea id="task-description" rows="3" placeholder="Décrivez votre quête en détail..."></textarea>
                     </div>
-                    <div class="form-group">
-                        <label for="task-category"><i class="fas fa-hourglass-half"></i> Type de Quête</label>
-                        <select id="task-category">
-                            <option value="daily">Quête Quotidienne (⚔️⚔️⚔️)</option>
-                            <option value="once">Quête Ponctuelle (⚔️⚔️)</option>
-                        </select>
-                    </div>
-                    <button type="submit" class="btn btn-primary">
-                        <i class="fas fa-plus-circle"></i> Lancer la Quête
+                    <button type="submit" class="btn btn-primary quest-submit-btn">
+                        <i class="fas fa-plus"></i> Ajouter la Quête
                     </button>
                 </form>
+                <div class="parchment-seal">
+                    <i class="fas fa-certificate"></i>
+                </div>
             </div>
 
             <!-- ===== LISTE DES QUÊTES ===== -->
             <div class="tasks-list">
-                <h3><i class="fas fa-list"></i> Quêtes en Cours (0/0)</h3>
+                <div class="tasks-list-header">
+                    <div class="header-left">
+                        <i class="fas fa-list"></i>
+                        <h2>Mes Quêtes</h2>
+                        <span class="quest-count" id="quest-count">0 quête(s) active(s)</span>
+                    </div>
+                    <div class="header-right">
+                        <div class="difficulty-legend">
+                            <span class="difficulty-item daily">
+                                <i class="fas fa-bolt"></i> Quotidienne
+                            </span>
+                            <span class="difficulty-item once">
+                                <i class="fas fa-crown"></i> Unique
+                            </span>
+                        </div>
+                    </div>
+                </div>
                 <div class="tasks-grid" id="tasks-grid">
+                    <!-- Tasks rendered by JS -->
                 </div>
             </div>
 
-            <!-- ===== SECTION SUCCÈS (BADGES) ===== -->
+            <!-- ===== SUCCÈS RÉCENTS ===== -->
             <div class="success-section">
                 <div class="section-header">
-                    <h2><i class="fas fa-trophy"></i> Mes Succès Légendaires</h2>
-                    <p>Débloquez ces récompenses en accomplissant vos quêtes. Chaque succès vous rapproche de la grandeur !</p>
+                    <div class="section-divider">
+                        <i class="fas fa-medal"></i>
+                        <h2>Succès Récemment Débloqués</h2>
+                    </div>
                 </div>
-
                 <div class="success-grid" id="success-grid">
+                    <!-- Badges rendered by JS -->
                 </div>
             </div>
         </section>
     </main>
 
+    <!-- ===== FOOTER ===== -->
     <footer>
         <div class="container">
             <div class="footer-content">
@@ -88,374 +164,12 @@
                     <i class="fas fa-dragon"></i>
                     <span>Quête Éternelle</span>
                 </div>
-                <p>Chaque quête compte dans votre légende éternelle.</p>
+                <p class="footer-tagline">Que votre légende soit écrite dans les étoiles...</p>
             </div>
         </div>
     </footer>
 
-    <script>
-    // ===== DONNÉES STOCKÉES =====
-    let tasks = JSON.parse(localStorage.getItem('tasks')) || [];
-    let totalPoints = parseInt(localStorage.getItem('totalPoints')) || 0;
-    let badges = JSON.parse(localStorage.getItem('badges')) || [];
-    let streak = parseInt(localStorage.getItem('streak')) || 0;
-    let lastTaskDate = localStorage.getItem('lastTaskDate') || null;
-
-    // ===== DÉFINITION DES SUCCÈS (BADGES) =====
-    const allBadges = [
-        {
-            id: "first-step",
-            name: "Premier Pas",
-            description: "Avoir 10 points d'expérience",
-            icon: "fa-star",
-            color: "#f59e0b",
-            points: 10,
-            condition: (xp) => xp >= 10,
-            unlocked: false
-        },
-        {
-            id: "adventurer",
-            name: "Aventurier",
-            description: "Avoir 50 points d'expérience",
-            icon: "fa-hiking",
-            color: "#10b981",
-            points: 50,
-            condition: (xp) => xp >= 50,
-            unlocked: false
-        },
-        {
-            id: "quest-master",
-            name: "Maître des Quêtes",
-            description: "Avoir 100 points d'expérience",
-            icon: "fa-crown",
-            color: "#8b5cf6",
-            points: 100,
-            condition: (xp) => xp >= 100,
-            unlocked: false
-        },
-        {
-            id: "dragon-slayer",
-            name: "Tueur de Dragon",
-            description: "Terminer une quête quotidienne",
-            icon: "fa-dragon",
-            color: "#ef4444",
-            points: 25,
-            condition: (xp, completedTasks) => completedTasks.some(t => t.category === 'daily'),
-            unlocked: false
-        },
-        {
-            id: "legendary",
-            name: "Légendaire",
-            description: "Terminer 5 quêtes",
-            icon: "fa-fire",
-            color: "#f97316",
-            points: 50,
-            condition: (xp, completedTasks) => completedTasks.length >= 5,
-            unlocked: false
-        },
-        {
-            id: "streak-master",
-            name: "Maître de la Streak",
-            description: "Terminer 7 quêtes quotidiennes d'affilée",
-            icon: "fa-infinity",
-            color: "#06b6d4",
-            points: 100,
-            condition: (xp, completedTasks, currentStreak) => currentStreak >= 7,
-            unlocked: false
-        },
-        {
-            id: "mercenary",
-            name: "Mercenaire",
-            description: "Terminer 10 quêtes ponctuelles",
-            icon: "fa-coins",
-            color: "#84cc16",
-            points: 75,
-            condition: (xp, completedTasks) => completedTasks.filter(t => t.category === 'once').length >= 10,
-            unlocked: false
-        },
-        {
-            id: "collector",
-            name: "Collectionneur",
-            description: "Avoir 5 succès différents",
-            icon: "fa-layer-group",
-            color: "#ec4899",
-            points: 50,
-            condition: (xp, completedTasks, currentBadges) => currentBadges.length >= 5,
-            unlocked: false
-        },
-        {
-            id: "speedrunner",
-            name: "Speedrunner",
-            description: "Terminer 3 quêtes en 1 jour",
-            icon: "fa-bolt",
-            color: "#f59e0b",
-            points: 40,
-            condition: (xp, completedTasks) => {
-                const today = new Date().toDateString();
-                const todayTasks = completedTasks.filter(t => {
-                    const taskDate = new Date(t.completedDate).toDateString();
-                    return taskDate === today;
-                });
-                return todayTasks.length >= 3;
-            },
-            unlocked: false
-        },
-        {
-            id: "perfectionist",
-            name: "Perfectionniste",
-            description: "Avoir un taux de réussite de 100%",
-            icon: "fa-check-double",
-            color: "#10b981",
-            points: 60,
-            condition: (xp, completedTasks) => {
-                const total = tasks.length;
-                const completed = completedTasks.length;
-                return total > 0 && completed === total;
-            },
-            unlocked: false
-        }
-    ];
-
-    // ===== FONCTIONS DE GESTION =====
-    function saveData() {
-        localStorage.setItem('tasks', JSON.stringify(tasks));
-        localStorage.setItem('totalPoints', totalPoints);
-        localStorage.setItem('badges', JSON.stringify(badges));
-        localStorage.setItem('streak', streak);
-        localStorage.setItem('lastTaskDate', lastTaskDate);
-    }
-
-    function checkStreak() {
-        const today = new Date().toDateString();
-
-        if (lastTaskDate === today) {
-            // Même jour, on continue la streak
-            streak++;
-        } else if (lastTaskDate === null || new Date(lastTaskDate) < new Date(today)) {
-            // Nouveau jour, on réinitialise ou continue la streak
-            if (lastTaskDate !== null && new Date(lastTaskDate) < new Date(today)) {
-                streak = 1;
-            } else {
-                streak++;
-            }
-        }
-
-        lastTaskDate = today;
-        saveData();
-    }
-
-    function checkBadges() {
-        allBadges.forEach(badge => {
-            if (!badge.unlocked && badge.condition(totalPoints, tasks.filter(t => t.completed), streak)) {
-                badge.unlocked = true;
-                badges.push({
-                    id: badge.id,
-                    name: badge.name,
-                    description: badge.description,
-                    icon: badge.icon,
-                    color: badge.color,
-                    points: badge.points
-                });
-            }
-        });
-
-        // Vérifier les badges basés sur les tâches
-        const completedTasks = tasks.filter(t => t.completed);
-
-        allBadges.forEach(badge => {
-            if (!badge.unlocked && badge.condition(totalPoints, completedTasks, streak)) {
-                badge.unlocked = true;
-                if (!badges.some(b => b.id === badge.id)) {
-                    badges.push({
-                        id: badge.id,
-                        name: badge.name,
-                        description: badge.description,
-                        icon: badge.icon,
-                        color: badge.color,
-                        points: badge.points
-                    });
-                }
-            }
-        });
-
-        saveData();
-    }
-
-    function renderTasks() {
-        const grid = document.getElementById('tasks-grid');
-        grid.innerHTML = '';
-
-        const completedTasks = tasks.filter(task => task.completed);
-        document.querySelector('.tasks-list h3').textContent = `Quêtes en Cours (${completedTasks.length}/${tasks.length})`;
-
-        if (tasks.length === 0) {
-            grid.innerHTML = `
-                <div class="empty-state">
-                    <div class="empty-icon">
-                        <i class="fas fa-compass"></i>
-                    </div>
-                    <h3>Pas de quêtes actives</h3>
-                    <p>Vous n'avez aucune quête en cours. Ajoutez-en une pour commencer votre aventure !</p>
-                    <button class="btn btn-primary" onclick="document.getElementById('task-title').focus()">
-                        <i class="fas fa-plus"></i> Ajouter une quête
-                    </button>
-                </div>
-            `;
-            return;
-        }
-
-        tasks.forEach((task, index) => {
-            const taskCard = document.createElement('div');
-            taskCard.className = `task-card ${task.completed ? 'task-completed' : ''}`;
-            taskCard.innerHTML = `
-                <div class="task-header">
-                    <div class="task-icon">
-                        ${task.completed ? '<i class="fas fa-check-circle"></i>' : '<i class="fas fa-circle"></i>'}
-                    </div>
-                    <h3 class="task-title">${task.title}</h3>
-                    <span class="task-category ${task.category}">
-                        ${task.category === 'daily' ? 'Quête Quotidienne' : 'Quête Ponctuelle'}
-                    </span>
-                </div>
-                <p class="task-description">${task.description || 'Aucune description'}</p>
-                <div class="task-footer">
-                    <div class="task-meta">
-                        <span class="task-points">+${task.points} XP</span>
-                        <span class="task-difficulty">
-                            ${task.category === 'daily' ? '⚔️⚔️⚔️' : '⚔️⚔️'}
-                        </span>
-                    </div>
-                    <div class="task-actions">
-                        <button class="btn ${task.completed ? 'btn-success' : 'btn-primary'}"
-                                onclick="toggleTask(${index})">
-                            ${task.completed ? '<i class="fas fa-check"></i> Accomplie' : '<i class="fas fa-flag"></i> Terminer'}
-                        </button>
-                        <button class="btn btn-danger" onclick="deleteTask(${index})">
-                            <i class="fas fa-trash"></i> Abandonner
-                        </button>
-                    </div>
-                </div>
-            `;
-            grid.appendChild(taskCard);
-        });
-    }
-
-    function renderSuccess() {
-        const grid = document.getElementById('success-grid');
-        grid.innerHTML = '';
-
-        if (badges.length === 0) {
-            grid.innerHTML = `
-                <div class="empty-state">
-                    <div class="empty-icon">
-                        <i class="fas fa-medal"></i>
-                    </div>
-                    <h3>Aucun succès débloqué</h3>
-                    <p>Terminez des quêtes pour débloquer des récompenses!</p>
-                    <button class="btn btn-primary" onclick="document.getElementById('task-title').focus()">
-                        <i class="fas fa-plus"></i> Ajouter une quête
-                    </button>
-                </div>
-            `;
-            return;
-        }
-
-        badges.forEach(badge => {
-            const badgeCard = document.createElement('div');
-            badgeCard.className = 'badge-card';
-            badgeCard.innerHTML = `
-                <div class="badge-icon" style="background-color: ${badge.color}">
-                    <i class="fas ${badge.icon}"></i>
-                </div>
-                <h3 class="badge-name">${badge.name}</h3>
-                <p class="badge-description">${badge.description}</p>
-                <span class="badge-points">+${badge.points} XP</span>
-            `;
-            grid.appendChild(badgeCard);
-        });
-    }
-
-    function addTask(e) {
-        e.preventDefault();
-        const title = document.getElementById('task-title').value;
-        const description = document.getElementById('task-description').value;
-        const category = document.getElementById('task-category').value;
-
-        const newTask = {
-            title,
-            description,
-            category,
-            completed: false,
-            points: category === 'daily' ? 10 : 20,
-            completedDate: null
-        };
-
-        tasks.push(newTask);
-        saveData();
-        renderTasks();
-        e.target.reset();
-    }
-
-    function toggleTask(index) {
-        const task = tasks[index];
-        task.completed = !task.completed;
-
-        if (task.completed) {
-            task.completedDate = new Date().toISOString();
-            totalPoints += task.points;
-
-            // Mettre à jour la streak
-            checkStreak();
-        } else {
-            totalPoints -= task.points;
-            // Réinitialiser la streak si on annule une quête du jour
-            const today = new Date().toDateString();
-            if (task.completedDate && new Date(task.completedDate).toDateString() === today) {
-                streak = 0;
-                lastTaskDate = null;
-            }
-        }
-
-        saveData();
-        renderTasks();
-        updatePointsDisplay();
-        checkBadges();
-    }
-
-    function deleteTask(index) {
-        const task = tasks[index];
-        if (task.completed) {
-            totalPoints -= task.points;
-        }
-        tasks.splice(index, 1);
-        saveData();
-        renderTasks();
-        updatePointsDisplay();
-        checkBadges();
-    }
-
-    function updatePointsDisplay() {
-        document.getElementById('xp-points').textContent = totalPoints;
-        updateLevel();
-    }
-
-    function updateLevel() {
-        let level = 1;
-        let xpForLevel = 100;
-        while (totalPoints >= xpForLevel) {
-            level++;
-            xpForLevel += 50 * level;
-        }
-        document.getElementById('player-level').textContent = level;
-    }
-
-    document.addEventListener('DOMContentLoaded', function() {
-        document.getElementById('new-task-form').addEventListener('submit', addTask);
-        renderTasks();
-        updatePointsDisplay();
-        checkBadges();
-        renderSuccess();
-    });
-    </script>
+    <script src="js/main.js"></script>
+<script defer src="https://static.cloudflareinsights.com/beacon.min.js/v833ccba57c9e4d2798f2e76cebdd09a11778172276447" integrity="sha512-57MDmcccJXYtNnH+ZiBwzC4jb2rvgVCEokYN+L/nLlmO8rfYT/gIpW2A569iJ/3b+0UEasghjuZH/ma3wIs/EQ==" data-cf-beacon='{"version":"2024.11.0","token":"8607d2a720d14b038279025b2b5a82e5","server_timing":{"name":{"cfCacheStatus":true,"cfEdge":true,"cfExtPri":true,"cfL4":true,"cfOrigin":true,"cfSpeedBrain":true},"location_startswith":null}}' crossorigin="anonymous"></script>
 </body>
 </html>

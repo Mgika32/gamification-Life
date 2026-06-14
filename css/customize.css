@@ -1,0 +1,431 @@
+/* ═══════════════════════════════════════════════════════════
+   PERSONNALISATION - Quête Éternelle
+   ═══════════════════════════════════════════════════════════ */
+
+.customize-container {
+    display: grid;
+    grid-template-columns: 350px 1fr;
+    gap: 2rem;
+    padding: 2rem 0;
+}
+
+/* ─── PRÉVIEW PANEL ─── */
+.preview-panel {
+    position: sticky;
+    top: 2rem;
+    height: fit-content;
+}
+
+.preview-card {
+    background: linear-gradient(145deg, #1a1a2e 0%, #16213e 100%);
+    border-radius: 16px;
+    padding: 2rem;
+    text-align: center;
+    border: 2px solid #333;
+    box-shadow: 0 8px 32px rgba(0, 0, 0, 0.4);
+}
+
+.preview-title {
+    font-family: 'UnifrakturMaguntia', cursive;
+    color: #d4af37;
+    font-size: 1.2rem;
+    margin-bottom: 1.5rem;
+    text-shadow: 0 2px 4px rgba(0, 0, 0, 0.5);
+}
+
+.preview-avatar-container {
+    width: 140px;
+    height: 140px;
+    margin: 0 auto 1.5rem;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: linear-gradient(135deg, #2a2a4a 0%, #1a1a2e 100%);
+    transition: all 0.3s ease;
+}
+
+/* Cadres - Frames */
+.preview-avatar-container.frame-bois {
+    border: 4px solid #8B4513;
+    box-shadow: 0 0 20px rgba(139, 69, 19, 0.5);
+}
+
+.preview-avatar-container.frame-pierre {
+    border: 4px solid #6b7280;
+    box-shadow: 0 0 20px rgba(107, 114, 128, 0.5);
+}
+
+.preview-avatar-container.frame-bronze {
+    border: 4px solid #cd7f32;
+    box-shadow: 0 0 20px rgba(205, 127, 50, 0.5);
+}
+
+.preview-avatar-container.frame-argent {
+    border: 4px solid #c0c0c0;
+    box-shadow: 0 0 20px rgba(192, 192, 192, 0.5);
+}
+
+.preview-avatar-container.frame-or {
+    border: 4px solid #ffd700;
+    box-shadow: 0 0 25px rgba(255, 215, 0, 0.6);
+}
+
+.preview-avatar-container.frame-rubis {
+    border: 4px solid #e11d48;
+    box-shadow: 0 0 25px rgba(225, 29, 72, 0.6), inset 0 0 15px rgba(225, 29, 72, 0.3);
+}
+
+.preview-avatar-container.frame-saphir {
+    border: 4px solid #2563eb;
+    box-shadow: 0 0 25px rgba(37, 99, 235, 0.6), inset 0 0 15px rgba(37, 99, 235, 0.3);
+}
+
+.preview-avatar-container.frame-legendaire {
+    border: 4px solid transparent;
+    background: linear-gradient(#1a1a2e, #1a1a2e) padding-box,
+                linear-gradient(45deg, #ff0000, #ff7f00, #ffff00, #00ff00, #0000ff, #4b0082, #9400d3) border-box;
+    animation: rainbow-border 3s linear infinite;
+    box-shadow: 0 0 30px rgba(255, 215, 0, 0.5);
+}
+
+@keyframes rainbow-border {
+    0% { background: linear-gradient(#1a1a2e, #1a1a2e) padding-box, linear-gradient(45deg, #ff0000, #ff7f00, #ffff00, #00ff00, #0000ff, #4b0082, #9400d3) border-box; }
+    25% { background: linear-gradient(#1a1a2e, #1a1a2e) padding-box, linear-gradient(45deg, #9400d3, #ff0000, #ff7f00, #ffff00, #00ff00, #0000ff, #4b0082) border-box; }
+    50% { background: linear-gradient(#1a1a2e, #1a1a2e) padding-box, linear-gradient(45deg, #4b0082, #9400d3, #ff0000, #ff7f00, #ffff00, #00ff00, #0000ff) border-box; }
+    75% { background: linear-gradient(#1a1a2e, #1a1a2e) padding-box, linear-gradient(45deg, #0000ff, #4b0082, #9400d3, #ff0000, #ff7f00, #ffff00, #00ff00) border-box; }
+    100% { background: linear-gradient(#1a1a2e, #1a1a2e) padding-box, linear-gradient(45deg, #00ff00, #0000ff, #4b0082, #9400d3, #ff0000, #ff7f00, #ffff00) border-box; }
+}
+
+.preview-avatar {
+    font-size: 3.5rem;
+    color: #d4af37;
+}
+
+.preview-name {
+    font-family: 'UnifrakturMaguntia', cursive;
+    color: #e5e7eb;
+    font-size: 1.4rem;
+    margin-bottom: 0.3rem;
+}
+
+.preview-title-text {
+    color: #9ca3af;
+    font-size: 0.9rem;
+    font-style: italic;
+}
+
+.preview-points {
+    margin-top: 1.5rem;
+    padding: 0.8rem;
+    background: rgba(212, 175, 55, 0.1);
+    border-radius: 8px;
+    border: 1px solid rgba(212, 175, 55, 0.3);
+}
+
+.preview-points span {
+    color: #d4af37;
+    font-weight: bold;
+}
+
+/* ─── OPTIONS PANEL ─── */
+.options-panel {
+    background: linear-gradient(145deg, #1a1a2e 0%, #16213e 100%);
+    border-radius: 16px;
+    padding: 1.5rem;
+    border: 2px solid #333;
+    box-shadow: 0 8px 32px rgba(0, 0, 0, 0.4);
+}
+
+.customize-tabs {
+    display: flex;
+    gap: 0.5rem;
+    margin-bottom: 1.5rem;
+    flex-wrap: wrap;
+}
+
+.tab-btn {
+    flex: 1;
+    min-width: 80px;
+    padding: 0.8rem 1rem;
+    background: linear-gradient(145deg, #2a2a4a 0%, #1f1f35 100%);
+    border: 2px solid #3a3a5a;
+    border-radius: 8px;
+    color: #9ca3af;
+    font-family: 'IM Fell English', serif;
+    font-size: 1rem;
+    cursor: pointer;
+    transition: all 0.3s ease;
+}
+
+.tab-btn:hover {
+    border-color: #d4af37;
+    color: #e5e7eb;
+}
+
+.tab-btn.active {
+    background: linear-gradient(145deg, #d4af37 0%, #b8962e 100%);
+    border-color: #ffd700;
+    color: #1a1a2e;
+    font-weight: bold;
+    box-shadow: 0 0 15px rgba(212, 175, 55, 0.4);
+}
+
+.tab-content {
+    display: none;
+    max-height: 400px;
+    overflow-y: auto;
+    padding-right: 0.5rem;
+}
+
+.tab-content.active {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(100px, 1fr));
+    gap: 1rem;
+}
+
+/* Scrollbar styling */
+.tab-content::-webkit-scrollbar {
+    width: 6px;
+}
+
+.tab-content::-webkit-scrollbar-track {
+    background: #1a1a2e;
+    border-radius: 3px;
+}
+
+.tab-content::-webkit-scrollbar-thumb {
+    background: #3a3a5a;
+    border-radius: 3px;
+}
+
+/* ─── ITEMS ─── */
+.customize-item {
+    background: linear-gradient(145deg, #2a2a4a 0%, #1f1f35 100%);
+    border: 2px solid #3a3a5a;
+    border-radius: 12px;
+    padding: 1rem;
+    text-align: center;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    position: relative;
+}
+
+.customize-item:hover:not(.locked) {
+    border-color: #d4af37;
+    transform: translateY(-3px);
+    box-shadow: 0 5px 20px rgba(212, 175, 55, 0.3);
+}
+
+.customize-item.selected {
+    border-color: #ffd700;
+    box-shadow: 0 0 20px rgba(255, 215, 0, 0.5);
+    background: linear-gradient(145deg, #3a3a5a 0%, #2a2a4a 100%);
+}
+
+.customize-item.locked {
+    opacity: 0.5;
+    cursor: not-allowed;
+    filter: grayscale(80%);
+}
+
+.customize-item.locked::after {
+    content: '\f023';
+    font-family: 'Font Awesome 6 Free';
+    font-weight: 900;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    font-size: 1.5rem;
+    color: #ef4444;
+    opacity: 0.8;
+}
+
+.item-icon {
+    font-size: 2rem;
+    margin-bottom: 0.5rem;
+    display: block;
+}
+
+.item-name {
+    color: #e5e7eb;
+    font-size: 0.85rem;
+    font-weight: 500;
+}
+
+.item-cost {
+    color: #d4af37;
+    font-size: 0.75rem;
+    margin-top: 0.3rem;
+}
+
+.item-cost.free {
+    color: #10b981;
+}
+
+/* Avatars specifically */
+.avatar-item .item-icon {
+    font-size: 2.2rem;
+    color: #d4af37;
+}
+
+.avatar-item.locked .item-icon {
+    color: #6b7280;
+}
+
+/* Frames specifically */
+.frame-item .item-preview {
+    width: 50px;
+    height: 50px;
+    border-radius: 50%;
+    margin: 0 auto 0.5rem;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 1.2rem;
+    color: #d4af37;
+}
+
+.frame-item[data-frame="bois"] .item-preview {
+    border: 3px solid #8B4513;
+    background: rgba(139, 69, 19, 0.2);
+}
+
+.frame-item[data-frame="pierre"] .item-preview {
+    border: 3px solid #6b7280;
+    background: rgba(107, 114, 128, 0.2);
+}
+
+.frame-item[data-frame="bronze"] .item-preview {
+    border: 3px solid #cd7f32;
+    background: rgba(205, 127, 50, 0.2);
+}
+
+.frame-item[data-frame="argent"] .item-preview {
+    border: 3px solid #c0c0c0;
+    background: rgba(192, 192, 192, 0.2);
+}
+
+.frame-item[data-frame="or"] .item-preview {
+    border: 3px solid #ffd700;
+    background: rgba(255, 215, 0, 0.2);
+}
+
+.frame-item[data-frame="rubis"] .item-preview {
+    border: 3px solid #e11d48;
+    background: rgba(225, 29, 72, 0.2);
+}
+
+.frame-item[data-frame="saphir"] .item-preview {
+    border: 3px solid #2563eb;
+    background: rgba(37, 99, 235, 0.2);
+}
+
+.frame-item[data-frame="legendaire"] .item-preview {
+    border: 3px solid transparent;
+    background: linear-gradient(#2a2a4a, #2a2a4a) padding-box,
+                linear-gradient(45deg, #ff0000, #ff7f00, #ffff00, #00ff00, #0000ff, #4b0082, #9400d3) border-box;
+    animation: rainbow-border 3s linear infinite;
+}
+
+/* Titles specifically */
+.title-item .item-icon {
+    font-size: 1rem;
+    color: #9ca3af;
+}
+
+.title-item.selected .item-icon {
+    color: #d4af37;
+}
+
+/* Colors specifically */
+.color-item {
+    padding: 0.5rem;
+}
+
+.color-item .item-preview {
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    margin: 0 auto 0.5rem;
+    border: 2px solid #3a3a5a;
+    transition: all 0.3s ease;
+}
+
+.color-item:hover .item-preview {
+    transform: scale(1.1);
+}
+
+.color-item.selected .item-preview {
+    border-color: #ffd700;
+    box-shadow: 0 0 15px rgba(255, 215, 0, 0.5);
+}
+
+/* ─── SAVE BUTTON ─── */
+.save-btn {
+    width: 100%;
+    margin-top: 1.5rem;
+    padding: 1rem 2rem;
+    background: linear-gradient(145deg, #d4af37 0%, #b8962e 100%);
+    border: none;
+    border-radius: 12px;
+    color: #1a1a2e;
+    font-family: 'UnifrakturMaguntia', cursive;
+    font-size: 1.3rem;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    text-transform: uppercase;
+    letter-spacing: 2px;
+}
+
+.save-btn:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 5px 25px rgba(212, 175, 55, 0.5);
+    background: linear-gradient(145deg, #ffd700 0%, #d4af37 100%);
+}
+
+.save-btn:active {
+    transform: translateY(0);
+}
+
+/* ─── RESPONSIVE ─── */
+@media (max-width: 900px) {
+    .customize-container {
+        grid-template-columns: 1fr;
+    }
+
+    .preview-panel {
+        position: static;
+    }
+
+    .customize-tabs {
+        justify-content: center;
+    }
+
+    .tab-btn {
+        min-width: 70px;
+        padding: 0.6rem 0.8rem;
+        font-size: 0.9rem;
+    }
+}
+
+@media (max-width: 500px) {
+    .customize-container {
+        padding: 1rem 0;
+    }
+
+    .preview-avatar-container {
+        width: 100px;
+        height: 100px;
+    }
+
+    .preview-avatar {
+        font-size: 2.5rem;
+    }
+
+    .tab-content {
+        grid-template-columns: repeat(2, 1fr);
+    }
+}
+
